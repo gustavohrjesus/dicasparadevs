@@ -88,7 +88,8 @@ $ %24
 ' %27
 ```
 
-## INSTALAcao DE EXTENSAO DO _TAILWIND CSS INTELLISENSE_ NO VSCODE
+## INSTALACAO DA EXTENSAO DO _TAILWIND CSS INTELLISENSE_ NO VSCODE
+## INSTALACAO DA EXTENSAO SIMPLE REACT SNIPPETS (com poucas letras criar um bloco de prog inteiro)
 
 ## INSTALAR PLUGIN PRETTIER - OPTAMOS POR NAO USAR O PRETTIER POIS ELE DESCONFIGURAVA O README.md DA FORMA COMO QUERIAMOS MANTER A SUA FORMATACAO
 `npm install -D prettier prettier-plugin-tailwindcss`
@@ -126,6 +127,9 @@ Para isso:
   }
 ```
 > Foi criado o arquivo *global.css*, dentro do diretorio *app*. Iremos customizar esse arquivo obtendo a customizacao atraves dos temas fornecidos pelo (shadcn/ui - thenes)[https://ui.shadcn.com/themes]
+
+### ADICIONANDO COMPONENTES SHADCN/UI NA APLICACAO (shadcn/ui - components)[https://ui.shadcn.com/docs/components/accordion]
+`npx shadcn@2.1.3 add button`
 
 ## BCRYPT
 `npm install bcrypt`
