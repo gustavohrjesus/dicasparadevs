@@ -2,19 +2,20 @@
 
 ## FULL STACK WEEK - Finance IA
 
-### INSTALACOES DE PACOTES NO PROJETO
+## INSTALACOES DE PACOTES NO PROJETO
 
-### [NEXT](https://nextjs.org/docs/app/getting-started/installation)
-```npx create-next-app@14.2.16```
+## [NEXT](https://nextjs.org/docs/app/getting-started/installation)
+`npx create-next-app@14.2.16`
+
 Quando criando o projeto, aceitamos usar o TypeScript, ESLint, Tailwind CSS, rejeitamos os "src/" directory, aceitamos o App Router e rejeitamos os "import alias".
 
-### [PRISMA.IO](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-mysql)
-```npm install prisma@5.21.1```
+## [PRISMA.IO](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-mysql)
+`npm install prisma@5.21.1`
 
-#### PRISMA - a linha de comando abaixo ira criar o arquivo de configuracao do PRISMA
-```npx prisma init```
+### PRISMA - a linha de comando abaixo ira criar o arquivo de configuracao do PRISMA
+`npx prisma init`
 
-#### CONFIGURANDO O schema.prisma informando o provider (mysql) e as tabelas que serao criadas (model)
+### CONFIGURANDO O schema.prisma informando o provider (mysql) e as tabelas que serao criadas (model)
 ```
 generator client {
   provider = "prisma-client-js"
@@ -66,7 +67,7 @@ enum TransactionPaymentMethod {
 }
 ```
 
-#### CONFIGURANDO O .env para o PRISMA conseguir acessar o BD
+### CONFIGURANDO O .env para o PRISMA conseguir acessar o BD
 Abra o arquivo .env criado quando instalado o prima e sete o 'DATABASE_URL' conforme abaixo:
 `DATABASE_URL="mysql://user:passcode@localhost:3306/database"`
 
@@ -87,11 +88,12 @@ $ %24
 ' %27
 ```
 
-#### INSTALACAO DA EXTENSAO DO _TAILWIND CSS INTELLISENSE_ NO VSCODE
-## INSTALACAO DA EXTENSAO SIMPLE REACT SNIPPETS (com poucas letras criar um bloco de prog inteiro)
+### INSTALACAO DA EXTENSAO DO _TAILWIND CSS INTELLISENSE_ NO VSCODE
+### INSTALACAO DA EXTENSAO SIMPLE REACT SNIPPETS (com poucas letras criar um bloco de prog inteiro)
 
-#### INSTALAR PLUGIN PRETTIER - OPTAMOS POR NAO USAR O PRETTIER POIS ELE DESCONFIGURAVA O README.md DA FORMA COMO QUERIAMOS MANTER A SUA FORMATACAO
+### INSTALAR PLUGIN PRETTIER - OPTAMOS POR NAO USAR O PRETTIER POIS ELE DESCONFIGURAVA O README.md DA FORMA COMO QUERIAMOS MANTER A SUA FORMATACAO
 `npm install -D prettier prettier-plugin-tailwindcss`
+
 Crie o arquivo '.prettierrc.json' na raiz do projeto e edite-o inserindo as informacoes abaixo:
 ```
 {
@@ -100,11 +102,13 @@ Crie o arquivo '.prettierrc.json' na raiz do projeto e edite-o inserindo as info
 ```
 Instale tambem a extensao do PRETTIER no VSCode. Apos instalado, va no botao de Configuracao do VSCode (icone de engrenagem que encontra-se no canto inferior esquerdo), clique em 'Settings' e pesquise por 'Default Formatter' e em 'Editor: Default Formatter', selecione a opcao 'Prettier - Code formatter'. Apos, no campo de pesquisa digite 'Format On Save' e check a opcao 'Editor: Format On Save'
 
-#### INSTALCAO DO SHADCN/UI PARA OBTENCAO DE COMPONENTES PRONTOS - [shascn/ui](https://ui.shadcn.com/docs/installation/next)
+### INSTALCAO DO SHADCN/UI PARA OBTENCAO DE COMPONENTES PRONTOS - [shascn/ui](https://ui.shadcn.com/docs/installation/next)
 `npx shadcn@2.1.3 init`
+
 Serao criados alguns arquivos e diretorios:
-Foi criado o *lib* na raiz do projeto. Iremos alterar o nome para *_lib*, tornando-a uma pasta privada (o Next entende que diretorios iniciados por *_* sao diretorios privados) e muda-lo para dentro da pasta *app*.
+> Foi criado o *lib* na raiz do projeto. Iremos alterar o nome para *_lib*, tornando-a uma pasta privada (o Next entende que diretorios iniciados por *_* sao diretorios privados) e muda-lo para dentro da pasta *app*.
 > Foi criado o arquivo *components.json*, na raiz do projeto. Iremos alterar os *aliases* iniciados com '@' para '@/app/...', conforme abaixo:
+
 Alteramos disso:
 ```
 "aliases": {
@@ -127,11 +131,51 @@ Para isso:
 ```
 Foi criado o arquivo *global.css*, dentro do diretorio *app*. Iremos customizar esse arquivo obtendo a customizacao atraves dos temas fornecidos pelo [shadcn/ui - thenes](https://ui.shadcn.com/themes)
 
-#### ADICIONANDO COMPONENTES SHADCN/UI NA APLICACAO [shadcn/ui - components](https://ui.shadcn.com/docs/components/accordion)
+### ADICIONANDO COMPONENTES SHADCN/UI NA APLICACAO [shadcn/ui - components](https://ui.shadcn.com/docs/components/accordion)
 `npx shadcn@2.1.3 add button`
 
-#### [CLERK - SERVICO DE AUTENTICACAO](https://clerk.com/)
+### [CLERK - SERVICO DE AUTENTICACAO](https://clerk.com/)
 OBS.: Ha a necessidade de criar uma conta no Ckerk
+
+Apos criar uma conta no Clerk, o servico dele nos redirecionara para a tela de configuracao da aplicacao que estamos criando.
+Assim, em *Application Name* digitamo _Finance AI_ . Em "Sign in options" selecionamos somente "Email" e "Google". Por fim, clicamos em "Create application".
+Apos isto, somos redirecionados para uma tela que nos demonstra os proximos passos para utilizar o Clerk em nossa aplicacao.
+
+#### INSTALANDO O CLERK NO PROJETO
+`npm install @clerk/nextjs@5.7.5`
+
+Apos instalado, precisamos definir no arquivo _.env_ gerado pelo Next, do nosso projeto, a variavel de ambiente gerada pelo Clerk. Seria algo como:
+`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=VALOR_DA_VARIAVEL_GERADA`
+`CLERK_SECRET_KEY=VALORGERADO`
+
+Criamos o arquivo _middleware.ts_ na raiz do nosso projeto e colocamos o bloco de codigo que o Clerk nos fornece:
+```
+import { clerkMiddleware } from "@clerk/nextjs/server";
+export default clerkMiddleware();
+export const config = {
+  matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
+  ],
+};
+```
+
+Por fim, adicionamos o *ClerkProvider* no nosso arquivo _layout.tsx_, que eh o arquivo que envolve todo o nosso projeto ({chiildren}).
+
+Feito isto, no "/login/page.tsx", vamos importar o *SignInButton*, do "clerk/nextjs", e envolver o nosso botao de login com esse componente, conforme abaixo:
+```
+<SignInButton>
+    <Button variant="outline">
+        <LogInIcon className="mr-2"/>
+        Fazer login ou criar conta
+    </Button>
+</SignInButton>
+```
+
+Entao instalamos o [clerk/themes](https://clerk.com/docs/customization/themes) atraves do comando abaixo:
+`npm install @clerk/themes@2.1.37`
 
 ***
 
